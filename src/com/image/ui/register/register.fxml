@@ -4,12 +4,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:controller="com.image.ui.login.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.image.ui.register.RegisterController">
    <children>
-      <PasswordField fx:id="passwordField" layoutX="212.0" layoutY="225.0" />
-      <Button layoutX="260.0" layoutY="305.0" mnemonicParsing="false" onAction="#pressedButton" text="Button" />
-      <TextField fx:id="textField" layoutX="211.0" layoutY="175.0" />
-      <Separator layoutX="2.0" layoutY="329.0" prefHeight="11.0" prefWidth="600.0" />
-      <Label fx:id="forgotPassword" onMouseClicked="#forgotPasswordClicked" layoutX="237.0" layoutY="340.0" prefHeight="17.0" prefWidth="97.0" text="Forgot password?" />
+      <Button layoutX="276.0" layoutY="348.0" mnemonicParsing="false" onAction="#pressedButton" text="Button" />
+      <PasswordField fx:id="passwordField" layoutX="228.0" layoutY="70.0" promptText="password" />
+      <TextField fx:id="loginField" layoutX="226.0" layoutY="22.0" promptText="login" />
+      <PasswordField fx:id="confirmPassword" layoutX="228.0" layoutY="123.0" promptText="password" />
+      <TextField fx:id="firstName" layoutX="228.0" layoutY="170.0" promptText="First name" />
+      <TextField fx:id="lastName" layoutX="228.0" layoutY="216.0" promptText="Last name" />
+      <TextField fx:id="email" layoutX="227.0" layoutY="256.0" promptText="E-mail" />
+      <TextField fx:id="keyWord" layoutX="227.0" layoutY="295.0" promptText="Key word" />
    </children>
 </Pane>

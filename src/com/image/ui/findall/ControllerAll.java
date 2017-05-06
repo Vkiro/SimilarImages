@@ -1,4 +1,4 @@
-package com.image.ui;
+package com.image.ui.findall;
 
 import com.image.dao.DAOException;
 import com.image.dao.DAOFactory;
@@ -34,30 +34,54 @@ import java.util.ResourceBundle;
  * TODO
  */
 public class ControllerAll implements Initializable {
-    Image image;
-
+    public static List<com.image.domain.Image> result = new ArrayList<>();
     @FXML
-    GridPane gridPane;
-    ArrayList<ImageView> imageViews;
+   private GridPane gridPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*ImageDAO imageDAO = DAOFactory.getImageDAO();
+        ImageDAO imageDAO = DAOFactory.getImageDAO();
+        int rowCounter = -1;
         try {
             List<com.image.domain.Image> imageList = imageDAO.getAllImages();
-            loadImage(imageList);
-            for (com.image.domain.Image i : imageList) {
-                for (com.image.domain.Image j : imageList) {
-                    Finder.match(i.getImageData(), j.getImageData());
+            for (int i = 0; i < imageList.size(); i++) {
+                for (int j = i + 1; j < imageList.size(); j++) {
+                    double accum = Finder.match(imageList.get(i).getImageData(), imageList.get(j).getImageData());
+                    if (accum > 15) {
+                        writeImages(imageList.get(i), imageList.get(j), ++rowCounter);
+                    }
                 }
             }
         } catch (DAOException e) {
             e.printStackTrace();
-        }*/
+        }
+    }
+
+    private void writeImages(com.image.domain.Image i, com.image.domain.Image j, int row) {
+        Image image1 = com.image.domain.Image.blobToImage(i.getImageView());
+        Image image2 = com.image.domain.Image.blobToImage(j.getImageView());
+
+        ImageView imageView1 = new ImageView(image1);
+        ImageView imageView2 = new ImageView(image2);
+
+        imageView1.setFitHeight(150);
+        imageView2.setFitHeight(150);
+        imageView1.setFitWidth(150);
+        imageView2.setFitWidth(150);
+
+        GridPane.setMargin(imageView1, new Insets(5, 5, 5, 5));
+        GridPane.setMargin(imageView2, new Insets(5, 5, 5, 5));
+        gridPane.add(imageView1, 0, row);
+        gridPane.add(imageView2, 1, row);
+    }
+
+    public void buttonPressedAdd(ActionEvent actionEvent) {
+
+
     }
 
 
-    public void buttonPressed(ActionEvent actionEvent) {
+    /*public void buttonPressed(ActionEvent actionEvent) { // Load all images from HardDisc
         FileChooser fileChooser = new FileChooser();
 
         //Set extension filter
@@ -80,7 +104,7 @@ public class ControllerAll implements Initializable {
             ImageData imageData = Finder.createImageData(selectedFiles.get(i).getAbsolutePath());
 
             try {
-                imageDAO.createImage(selectedFiles.get(i).getName(), images.get(i), imageData, 3);
+                imageDAO.createImage(selectedFiles.get(i).getName(), images.get(i), imageData, 4);
             } catch (DAOException e) {
                 e.printStackTrace();
             }
@@ -89,15 +113,15 @@ public class ControllerAll implements Initializable {
             // loadImage(images);
         }
     }
-
-    public void loadImage(List<com.image.domain.Image> images) {
-            /*BufferedImage bufferedImage = null;
+*/
+    /*public void loadImage(List<com.image.domain.Image> images) {
+            *//*BufferedImage bufferedImage = null;
         try {
             bufferedImage = ImageIO.read(new File("C:\\Users\\Vladik\\IdeaProjects\\YakovFain\\ip1.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Image image = SwingFXUtils.toFXImage(bufferedImage, null);*/
+        Image image = SwingFXUtils.toFXImage(bufferedImage, null);*//*
 
         List<Image> list = new ArrayList<>();
         for (com.image.domain.Image i : images) {
@@ -121,14 +145,14 @@ public class ControllerAll implements Initializable {
                 count++;
             }
         }
-            /*imageViews.get(0).addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            *//*imageViews.get(0).addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
                 @Override
                 public void handle(MouseEvent event) {
                     System.out.println("Tile pressed ");
                     event.consume();
                 }
-            });*/
+            });*//*
     }
 
     public void secondButtonPressed(ActionEvent actionEvent) {
@@ -157,6 +181,6 @@ public class ControllerAll implements Initializable {
         } catch (DAOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
 

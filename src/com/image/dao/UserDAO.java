@@ -109,4 +109,37 @@ public class UserDAO {
         }
         return user;
     }
+
+    public void createUser(String login, String password, String firstName, String lastName, String email, String keyWord) throws DAOException {
+        DAOFactory factory = new DAOFactory();
+        String query = "INSERT INTO users (login, password, firstName, lastName, email, keyWord) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection connection = factory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, login);
+            statement.setString(2, password);
+            statement.setString(3, firstName);
+            statement.setString(4, lastName);
+            statement.setString(5, email);
+            statement.setString(6, keyWord);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Can`t execute query", e);
+        }
+    }
+
+    public void createUser(String login, String password, String keyWord) throws DAOException {
+        DAOFactory factory = new DAOFactory();
+        String query = "INSERT INTO users (login, password, keyWord) VALUES (?, ?, ?)";
+
+        try (Connection connection = factory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, login);
+            statement.setString(2, password);
+            statement.setString(3, keyWord);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Can`t execute query", e);
+        }
+    }
 }

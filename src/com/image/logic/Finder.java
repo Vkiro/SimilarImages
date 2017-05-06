@@ -42,7 +42,7 @@ public class Finder {
         MatOfDMatch topTenBestMatches = new MatOfDMatch();
         topTenBestMatches.fromList(bestMatches.subList(0, 8));
 
-        corners(bestMatches, topTenBestMatches, imageData1.getKeyPoints(), imageData2.getKeyPoints());
+        //corners(bestMatches, topTenBestMatches, imageData1.getKeyPoints(), imageData2.getKeyPoints());
 
        /* Mat outputImg = drawImage(imageData1.getImage(), imageData1.getKeyPoints(), imageData2.getImage(), imageData2.getKeyPoints(), topTenBestMatches);
 
@@ -100,7 +100,7 @@ double result = (((double) bestMatches.size() / imageData2.getKeyPoints().toArra
 
             counter += Math.abs((radius.kut - radius2.kut));
         }
-        System.out.println("Різниця = " + counter);
+        //System.out.println("Різниця = " + counter);
     }
 
     private static void sortBestMatches(List<DMatch> bestMatches) {
