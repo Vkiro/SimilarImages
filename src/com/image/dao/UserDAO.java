@@ -16,7 +16,7 @@ public class UserDAO {
     public List<User> getAll() throws DAOException {
         DAOFactory factory = new DAOFactory();
         //TODO change *
-        String query = "SELECT * FROM Users";
+        String query = "SELECT id, login, password, firstName, lastName, email, keyWord FROM Users";
         ArrayList<User> listUsers = new ArrayList<>();
         try (Connection connection = factory.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
@@ -26,6 +26,10 @@ public class UserDAO {
                 user.setId(resultSet.getInt("id"));
                 user.setLogin(resultSet.getString("login"));
                 user.setPassword(resultSet.getString("password"));
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setEmail(resultSet.getString("email"));
+                user.setKeyWord(resultSet.getString("keyWord"));
                 listUsers.add(user);
             }
         } catch (SQLException sqle) {
@@ -36,7 +40,7 @@ public class UserDAO {
 
     public User getById(int userId) throws DAOException {
         DAOFactory factory = new DAOFactory();
-        String query = "SELECT id, login, password FROM Users WHERE id = ?";
+        String query = "SELECT id, login, password, firstName, lastName, email, keyWord FROM Users WHERE id = ?";
         User user;
         try (Connection connection = factory.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -47,6 +51,10 @@ public class UserDAO {
                 user.setId(resultSet.getInt("id"));
                 user.setLogin(resultSet.getString("login"));
                 user.setPassword(resultSet.getString("password"));
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setEmail(resultSet.getString("email"));
+                user.setKeyWord(resultSet.getString("keyWord"));
             } catch (SQLException sqle) {
                 throw new DAOException("Can`t execute query", sqle);
             }
@@ -74,5 +82,31 @@ public class UserDAO {
             throw new DAOException("Can`t execute query", sqle);
         }
         return id;
+    }
+
+    public User getByKeyWord(String keyWord) throws DAOException {
+        DAOFactory factory = new DAOFactory();
+        String query = "SELECT id, login, password, firstName, lastName, email, keyWord FROM Users WHERE keyWord = ?";
+        User user;
+        try (Connection connection = factory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, keyWord);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setLogin(resultSet.getString("login"));
+                user.setPassword(resultSet.getString("password"));
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setEmail(resultSet.getString("email"));
+                user.setKeyWord(keyWord);
+            } catch (SQLException sqle) {
+                throw new DAOException("Can`t execute query", sqle);
+            }
+        } catch (SQLException sqle) {
+            throw new DAOException("Can`t execute query", sqle);
+        }
+        return user;
     }
 }
