@@ -3,30 +3,26 @@ package com.image.ui.findall;
 import com.image.dao.DAOException;
 import com.image.dao.DAOFactory;
 import com.image.dao.ImageDAO;
+import com.image.dao.UserDAO;
+import com.image.domain.User;
 import com.image.logic.Finder;
-import com.image.logic.ImageData;
-import javafx.embed.swing.SwingFXUtils;
+import com.image.ui.userinformationpage.UserController;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.FileChooser;
-import sun.misc.IOUtils;
-import sun.nio.ch.IOUtil;
+import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.sql.Blob;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -34,12 +30,13 @@ import java.util.ResourceBundle;
  * TODO
  */
 public class ControllerAll implements Initializable {
-    public static List<com.image.domain.Image> result = new ArrayList<>();
+    public static com.image.domain.Image[][] result;
     @FXML
    private GridPane gridPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        result = new com.image.domain.Image[1000][2];
         ImageDAO imageDAO = DAOFactory.getImageDAO();
         int rowCounter = -1;
         try {
@@ -47,7 +44,7 @@ public class ControllerAll implements Initializable {
             for (int i = 0; i < imageList.size(); i++) {
                 for (int j = i + 1; j < imageList.size(); j++) {
                     double accum = Finder.match(imageList.get(i).getImageData(), imageList.get(j).getImageData());
-                    if (accum > 15) {
+                    if (accum > 30) {
                         writeImages(imageList.get(i), imageList.get(j), ++rowCounter);
                     }
                 }
@@ -55,29 +52,77 @@ public class ControllerAll implements Initializable {
         } catch (DAOException e) {
             e.printStackTrace();
         }
+
     }
 
     private void writeImages(com.image.domain.Image i, com.image.domain.Image j, int row) {
-        Image image1 = com.image.domain.Image.blobToImage(i.getImageView());
-        Image image2 = com.image.domain.Image.blobToImage(j.getImageView());
+        Image image1 = i.getImageView();
+        Image image2 = j.getImageView();
 
         ImageView imageView1 = new ImageView(image1);
         ImageView imageView2 = new ImageView(image2);
 
         imageView1.setFitHeight(150);
-        imageView2.setFitHeight(150);
         imageView1.setFitWidth(150);
+        imageView2.setFitHeight(150);
         imageView2.setFitWidth(150);
 
-        GridPane.setMargin(imageView1, new Insets(5, 5, 5, 5));
+        GridPane.setMargin(imageView1, new Insets(5, 5, 5, 95));
         GridPane.setMargin(imageView2, new Insets(5, 5, 5, 5));
         gridPane.add(imageView1, 0, row);
         gridPane.add(imageView2, 1, row);
+
+        result[row][0] = i;
+        result[row][1] = j;
     }
 
     public void buttonPressedAdd(ActionEvent actionEvent) {
 
 
+    }
+
+    public void buttonPressed(ActionEvent actionEvent) {
+        Parent root;
+        try {
+            // TODO add path
+            root = FXMLLoader.load(getClass().getResource("../thirdpage/third.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("My New Stage Title");
+            stage.setScene(new Scene(root, 500, 600));
+            stage.show();
+            // Hide this current window (if this is what you want)
+            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void gridPaneClicked(MouseEvent mouseEvent) {
+        for( Node node: gridPane.getChildren()) {
+            if( node instanceof ImageView) {
+                if( node.getBoundsInParent().contains(mouseEvent.getX(),  mouseEvent.getY())) {
+                    System.out.println( "Node: " + node + " at " + GridPane.getRowIndex( node) + "/" + GridPane.getColumnIndex( node));
+                    UserDAO userDAO = new UserDAO();
+                    User user;
+                    Parent root;
+                    try {
+                        user = userDAO.getById(result[GridPane.getRowIndex( node)][GridPane.getColumnIndex( node)].getUserId());
+                        // TODO add path
+                        UserController.user = user;
+                        root = FXMLLoader.load(getClass().getResource("../userinformationpage/user.fxml"));
+                        Stage stage = new Stage();
+                        stage.setTitle("My New Stage Title");
+                        stage.setScene(new Scene(root, 500, 600));
+                        stage.show();
+
+                    } catch (DAOException | IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }
     }
 
 

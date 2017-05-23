@@ -11,7 +11,7 @@
    <content>
       <BorderPane prefHeight="600.0" prefWidth="500.0">
          <center>
-            <GridPane fx:id="gridPane" prefHeight="560.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+            <GridPane onMouseClicked="#gridPaneClicked" fx:id="gridPane" prefHeight="560.0" prefWidth="500.0" BorderPane.alignment="CENTER">
 
             </GridPane>
          </center>

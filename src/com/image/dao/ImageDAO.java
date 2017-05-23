@@ -30,12 +30,14 @@ public class ImageDAO {
                 Image image = new Image();
                 image.setId(resultSet.getInt("id"));
                 image.setFileName(resultSet.getString("fileName"));
-                image.setImageView(resultSet.getBlob("imageView"));
+                image.setImageView(resultSet.getBinaryStream("imageView"));
+                image.setUserId(resultSet.getInt("userId"));
                 // Get object from DB
-                ObjectInputStream in = new ObjectInputStream(resultSet.getBlob("imageData").getBinaryStream());
+                ObjectInputStream in = new ObjectInputStream(resultSet.getBinaryStream("imageData"));
                 ImageData imageData = (ImageData) in.readObject();
                 image.setImageData(imageData);
                 listImages.add(image);
+
                 //listImages.add(com.image.domain.Image.blobToImage(resultSet.getBlob("imageView")));
             }
         } catch (SQLException | IOException e) {
@@ -45,6 +47,36 @@ public class ImageDAO {
         }
 
         return listImages;
+    }
+
+    public List<Image> getAllByUserId(int userId) throws DAOException {
+        DAOFactory factory = new DAOFactory();
+        //TODO
+        String query = "SELECT * FROM Images WHERE userId = ?";
+        List<Image> listImages = new ArrayList<>();
+        try (Connection connection = factory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Image image = new Image();
+                    image.setId(resultSet.getInt("id"));
+                    image.setFileName(resultSet.getString("fileName"));
+                    image.setImageView(resultSet.getBinaryStream("imageView"));
+                    image.setUserId(resultSet.getInt("userId"));
+                    // Get object from DB
+                    ObjectInputStream in = new ObjectInputStream(resultSet.getBinaryStream("imageData"));
+                    ImageData imageData = (ImageData) in.readObject();
+                    image.setImageData(imageData);
+                    listImages.add(image);
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                throw new DAOException("Can`t execute query", e);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Can`t execute query", e);
+        }
+        return  listImages;
     }
 
     public void createImage(String fileName, InputStream imageView, ImageData imageData, int userId) throws DAOException {

@@ -14,9 +14,10 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent panel = FXMLLoader.load(getClass().getResource("login/login.fxml"));
-        primaryStage.setTitle("Hello Diplom");
+        primaryStage.setTitle("Login page");
         Scene scene = new Scene(panel, 500, 600);
         primaryStage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("login/login.css").toExternalForm());
         primaryStage.show();
     }
 

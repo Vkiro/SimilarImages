@@ -16,7 +16,7 @@
          <top>
             <ToolBar prefHeight="35.0" prefWidth="500.0" BorderPane.alignment="CENTER">
               <items>
-                <Button mnemonicParsing="false" text="Home" />
+                <Button onAction="#buttonPressed" mnemonicParsing="false" text="Home" />
               </items>
             </ToolBar>
          </top>

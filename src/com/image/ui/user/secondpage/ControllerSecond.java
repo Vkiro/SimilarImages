@@ -1,4 +1,4 @@
-package com.image.ui.thirdpage;
+package com.image.ui.user.secondpage;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -15,17 +15,17 @@ import java.util.ResourceBundle;
 /**
  * TODO
  */
-public class ControllerThird implements Initializable {
+public class ControllerSecond implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void buttonPressedByImage(ActionEvent actionEvent) {
+    public void buttonPressedAdd(ActionEvent actionEvent) {
         Parent root;
         try {
             // TODO add path
-            root = FXMLLoader.load(getClass().getResource("../findbypicture/findbypicture.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../../addimages/add.fxml"));
             Stage stage = new Stage();
             stage.setTitle("My New Stage Title");
             stage.setScene(new Scene(root, 500, 600));
@@ -38,11 +38,11 @@ public class ControllerThird implements Initializable {
         }
     }
 
-    public void buttonPressedAllDB(ActionEvent actionEvent) {
+    public void buttonPressedShow(ActionEvent actionEvent) {
         Parent root;
         try {
             // TODO add path
-            root = FXMLLoader.load(getClass().getResource("../findall/findall.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../showmy/showmy.fxml"));
             Stage stage = new Stage();
             stage.setTitle("My New Stage Title");
             stage.setScene(new Scene(root, 500, 600));
@@ -55,11 +55,11 @@ public class ControllerThird implements Initializable {
         }
     }
 
-    public void buttonPressed(ActionEvent actionEvent) {
+    public void buttonPressedHome(ActionEvent actionEvent) {
         Parent root;
         try {
             // TODO add path
-            root = FXMLLoader.load(getClass().getResource("../secondpage/second.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../../login/login.fxml"));
             Stage stage = new Stage();
             stage.setTitle("My New Stage Title");
             stage.setScene(new Scene(root, 500, 600));

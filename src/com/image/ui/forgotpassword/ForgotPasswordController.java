@@ -43,14 +43,14 @@ public class ForgotPasswordController {
             Parent root;
             try {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error Dialog");
-                alert.setHeaderText("User login: " + user.getLogin() +
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText("User login: " + user.getLogin() + "\n" +
                         "User password: " + user.getPassword());
                 alert.showAndWait();
 
                 root = FXMLLoader.load(getClass().getResource("../login/login.fxml"));
                 Stage stage = new Stage();
-                stage.setTitle("My New Stage Title");
+                stage.setTitle("Login page");
                 stage.setScene(new Scene(root, 500, 600));
                 stage.show();
                 // Hide this current window (if this is what you want)
@@ -58,6 +58,21 @@ public class ForgotPasswordController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void pressedButtonHome(ActionEvent actionEvent) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../login/login.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Login page");
+            stage.setScene(new Scene(root, 500, 600));
+            stage.show();
+            // Hide this current window (if this is what you want)
+            ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

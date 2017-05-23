@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.image.ui.userinformationpage.UserController">
+   <children>
+      <TextField fx:id="loginField" layoutX="191.0" layoutY="180.0" promptText="Login" />
+      <TextField fx:id="firstName" layoutX="191.0" layoutY="227.0" promptText="First name" />
+      <TextField fx:id="lastName" layoutX="191.0" layoutY="275.0" promptText="Last name" />
+      <TextField fx:id="email" layoutX="191.0" layoutY="323.0" promptText="E-mail" />
+   </children>
+</Pane>

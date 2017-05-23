@@ -3,6 +3,8 @@ package com.image.ui.login;
 import com.image.dao.DAOException;
 import com.image.dao.DAOFactory;
 import com.image.dao.UserDAO;
+import com.image.ui.user.secondpage.ControllerSecond;
+import com.image.ui.user.showmy.ControllerShowMy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,8 +26,7 @@ import java.util.ResourceBundle;
  *
  */
 public class LoginController implements Initializable{
-    private static int userId;
-
+    public static int userId;
     @FXML
     private TextField textField;
 
@@ -33,6 +34,7 @@ public class LoginController implements Initializable{
     private PasswordField passwordField;
 
     public void pressedButton(ActionEvent actionEvent) {
+        userId = -1;
         UserDAO userDAO = DAOFactory.getUserDAO();
         try {
             userId = userDAO.getId(textField.getText(), passwordField.getText());
@@ -46,11 +48,27 @@ public class LoginController implements Initializable{
             alert.setHeaderText("Look, an Error Dialog");
             alert.setContentText("Ooops, there was an error!");
             alert.showAndWait();
-        } else {
+        } else if (userId == 4){ // Administrator
             Parent root;
             try {
                 // TODO add path
                 root = FXMLLoader.load(getClass().getResource("../secondpage/second.fxml"));
+                Stage stage = new Stage();
+                stage.setTitle("My New Stage Title");
+                stage.setScene(new Scene(root, 500, 600));
+                stage.show();
+                // Hide this current window (if this is what you want)
+                ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else { // User
+            Parent root;
+            try {
+                // TODO add path
+                ControllerShowMy.userId = userId;
+                root = FXMLLoader.load(getClass().getResource("../user/secondpage/second.fxml"));
                 Stage stage = new Stage();
                 stage.setTitle("My New Stage Title");
                 stage.setScene(new Scene(root, 500, 600));
@@ -73,6 +91,22 @@ public class LoginController implements Initializable{
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("../forgotpassword/forgotpassword.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("My New Stage Title");
+            stage.setScene(new Scene(root, 500, 600));
+            stage.show();
+            // Hide this current window (if this is what you want)
+            ((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void registerClicked(MouseEvent mouseEvent) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../register/register.fxml"));
             Stage stage = new Stage();
             stage.setTitle("My New Stage Title");
             stage.setScene(new Scene(root, 500, 600));

@@ -4,6 +4,7 @@ import com.image.dao.DAOException;
 import com.image.dao.DAOFactory;
 import com.image.dao.ImageDAO;
 import com.image.logic.Finder;
+import com.image.ui.login.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,6 +72,23 @@ public class ControllerSecond implements Initializable {
         try {
             // TODO add path
             root = FXMLLoader.load(getClass().getResource("../showall/showall.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("My New Stage Title");
+            stage.setScene(new Scene(root, 500, 600));
+            stage.show();
+            // Hide this current window (if this is what you want)
+            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void buttonPressedHome(ActionEvent actionEvent) {
+        Parent root;
+        try {
+            // TODO add path
+            root = FXMLLoader.load(getClass().getResource("../login/login.fxml"));
             Stage stage = new Stage();
             stage.setTitle("My New Stage Title");
             stage.setScene(new Scene(root, 500, 600));

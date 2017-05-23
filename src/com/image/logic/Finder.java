@@ -40,7 +40,7 @@ public class Finder {
         sortBestMatches(bestMatches);
 
         MatOfDMatch topTenBestMatches = new MatOfDMatch();
-        topTenBestMatches.fromList(bestMatches.subList(0, 8));
+        topTenBestMatches.fromList(bestMatches);
 
         //corners(bestMatches, topTenBestMatches, imageData1.getKeyPoints(), imageData2.getKeyPoints());
 

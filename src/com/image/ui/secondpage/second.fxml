@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -9,18 +10,18 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.image.ui.secondpage.ControllerSecond">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" stylesheets="@second.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.image.ui.secondpage.ControllerSecond">
    <content>
       <BorderPane prefHeight="600.0" prefWidth="500.0">
          <top>
             <ToolBar prefHeight="35.0" prefWidth="500.0" BorderPane.alignment="CENTER">
               <items>
-                <Button mnemonicParsing="false" text="Home" />
+                <Button mnemonicParsing="false" onAction="#buttonPressedHome" text="Home" />
               </items>
             </ToolBar>
          </top>
          <center>
-            <GridPane BorderPane.alignment="CENTER">
+            <GridPane maxHeight="565.0" maxWidth="500.0" prefHeight="565.0" prefWidth="500.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -30,9 +31,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button onAction="#buttonPressedAdd" mnemonicParsing="false" prefHeight="198.0" prefWidth="585.0" text="Add images" />
-                  <Button onAction="#buttonPressedFind" mnemonicParsing="false" prefHeight="215.0" prefWidth="713.0" text="Find similar" GridPane.rowIndex="1" />
-                  <Button onAction="#buttonPressedShow" mnemonicParsing="false" prefHeight="220.0" prefWidth="503.0" text="Show all" GridPane.rowIndex="2" />
+                  <Button fx:id="add" maxHeight="188.0" maxWidth="500.0" mnemonicParsing="false" onAction="#buttonPressedAdd" prefHeight="188.0" prefWidth="500.0" text="Add images" />
+                  <Button fx:id="find" maxHeight="188.0" maxWidth="500.0" mnemonicParsing="false" onAction="#buttonPressedFind" prefHeight="188.0" prefWidth="500.0" text="Find similar" GridPane.rowIndex="1" />
+                  <Button fx:id="show" maxHeight="188.0" maxWidth="500.0" mnemonicParsing="false" onAction="#buttonPressedShow" prefHeight="188.0" prefWidth="500.0" text="Show all" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </center>

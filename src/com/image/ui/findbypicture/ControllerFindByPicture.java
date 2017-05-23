@@ -5,16 +5,23 @@ import com.image.dao.DAOFactory;
 import com.image.dao.ImageDAO;
 import com.image.logic.Finder;
 import com.image.logic.ImageData;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +72,7 @@ public class ControllerFindByPicture implements Initializable{
     public void writeImages(List<com.image.domain.Image> images) {
         List<javafx.scene.image.Image> list = new ArrayList<>();
         for (com.image.domain.Image i : images) {
-            list.add(com.image.domain.Image.blobToImage(i.getImageView()));
+            list.add(i.getImageView());
         }
         ArrayList<ImageView> imageViews = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -97,5 +104,22 @@ public class ControllerFindByPicture implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void buttonPressed(ActionEvent actionEvent) {
+        Parent root;
+        try {
+            // TODO add path
+            root = FXMLLoader.load(getClass().getResource("../thirdpage/third.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("My New Stage Title");
+            stage.setScene(new Scene(root, 500, 600));
+            stage.show();
+            // Hide this current window (if this is what you want)
+            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

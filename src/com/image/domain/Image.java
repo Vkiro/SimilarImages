@@ -16,32 +16,39 @@ import java.sql.SQLException;
 public class Image {
     private int id;
     private String fileName;
-    private Blob imageView;
+    private javafx.scene.image.Image imageView;
     private int userId;
     private ImageData imageData;
 
     public Image() {
     }
 
-    public Image(int id, String fileName, Blob imageView, int userId, ImageData imageData) {
+    public Image(int id, String fileName, InputStream imageView, int userId, ImageData imageData) {
         this.id = id;
         this.fileName = fileName;
-        this.imageView = imageView;
+        this.imageView = blobToImage(imageView);
         this.userId = userId;
         this.imageData = imageData;
     }
 
-    public static javafx.scene.image.Image blobToImage(Blob b) {
-        BufferedImage bufferedImage = null;
+    public static javafx.scene.image.Image blobToImage(InputStream b) {
+        /*BufferedImage bufferedImage = null;
+        InputStream in = null;
         try {
-            InputStream in = b.getBinaryStream();
+            in = b.getBinaryStream();
             bufferedImage = ImageIO.read(in);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        javafx.scene.image.Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+        } finally {
+            try {
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }*/
+        javafx.scene.image.Image image = new javafx.scene.image.Image(b);
 
         return image;
     }
@@ -62,12 +69,12 @@ public class Image {
         this.fileName = fileName;
     }
 
-    public Blob getImageView() {
+    public javafx.scene.image.Image getImageView() {
         return imageView;
     }
 
-    public void setImageView(Blob imageView) {
-        this.imageView = imageView;
+    public void setImageView(InputStream imageView) {
+        this.imageView = blobToImage(imageView);
     }
 
     public int getUserId() {

@@ -4,15 +4,20 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.image.ui.register.RegisterController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.image.ui.register.RegisterController">
    <children>
-      <Button layoutX="276.0" layoutY="348.0" mnemonicParsing="false" onAction="#pressedButton" text="Button" />
-      <PasswordField fx:id="passwordField" layoutX="228.0" layoutY="70.0" promptText="password" />
-      <TextField fx:id="loginField" layoutX="226.0" layoutY="22.0" promptText="login" />
-      <PasswordField fx:id="confirmPassword" layoutX="228.0" layoutY="123.0" promptText="password" />
-      <TextField fx:id="firstName" layoutX="228.0" layoutY="170.0" promptText="First name" />
-      <TextField fx:id="lastName" layoutX="228.0" layoutY="216.0" promptText="Last name" />
-      <TextField fx:id="email" layoutX="227.0" layoutY="256.0" promptText="E-mail" />
-      <TextField fx:id="keyWord" layoutX="227.0" layoutY="295.0" promptText="Key word" />
+      <Button layoutX="235.0" layoutY="424.0" mnemonicParsing="false" onAction="#pressedButtonRegister" text="Register" />
+      <PasswordField fx:id="passwordField" layoutX="191.0" layoutY="131.0" promptText="Password" />
+      <TextField fx:id="loginField" layoutX="191.0" layoutY="81.0" promptText="Login" />
+      <PasswordField fx:id="confirmPassword" layoutX="191.0" layoutY="179.0" promptText="Confirm password" />
+      <TextField fx:id="firstName" layoutX="191.0" layoutY="227.0" promptText="First name" />
+      <TextField fx:id="lastName" layoutX="191.0" layoutY="275.0" promptText="Last name" />
+      <TextField fx:id="email" layoutX="191.0" layoutY="323.0" promptText="E-mail" />
+      <TextField fx:id="keyWord" layoutX="191.0" layoutY="370.0" promptText="Key word" />
+      <ToolBar layoutY="2.0" prefHeight="35.0" prefWidth="500.0">
+        <items>
+          <Button mnemonicParsing="false" onAction="#pressedButtonHome" text="Home" />
+        </items>
+      </ToolBar>
    </children>
 </Pane>
